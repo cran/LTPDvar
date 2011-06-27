@@ -1,0 +1,11 @@
+importFrom("graphics", plot)
+
+export("kL","Ims","planLTPD","OC")
+
+exportClasses("ACSPlan")
+
+
+exportMethods("plot",
+              "n",
+              "k")
+
