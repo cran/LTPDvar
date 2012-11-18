@@ -2,9 +2,9 @@
 \alias{OC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Operating characteristics
+Operating characteristic
 }
-\description{Calculation of probability of acceptance of a lot with fraction defective \eqn{p})
+\description{Calculation of probability of acceptance of a lot with fraction defective \eqn{p}
 when using plan \eqn{(n, k)} for sampling inspection
 }
 \usage{
@@ -22,11 +22,8 @@ sample size
 critical value
 }
   \item{type}{
-function used for operating characteristics; \code{"t"} stands for exact function using non-central t-distribution (see (Johnson  and Welch, 1940)), \code{"napprox"} stands for approximation using normal distribution,  (see (Jennett  and Welch, 1939))
+function used for operating characteristic; \code{"t"} stands for exact function using non-central t-distribution (see (Johnson  and Welch, 1940)), \code{"napprox"} stands for approximation using normal distribution,  (see (Jennett  and Welch, 1939))
 }
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
 }
 \value{
 probability of acceptance of a lot (single number)
@@ -41,18 +38,11 @@ Jennett, W. J. -  Welch, B. L.: The Control of Proportion Defective as Judged by
 
 Johnson, N. L. - Welch, B. L.: Applications of the Non-Central t-Distribution, Biometrika, Vol. 31, No. 3/4, pp. 362-389, 1940.
 }
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+
 \examples{
 OC(p=0.1,n=85,k=2.44)
 }

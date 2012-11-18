@@ -27,21 +27,11 @@ Objects represent sampling plan.
     \item{plot}{\code{signature(x = "ACSPlan")}: function for getting operating characteristics plot of the sampling plan }
 	 }
 }
-\references{
-%%  ~~put references to the literature/web site here~~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%%  ~~objects to See Also as \code{\link{~~fun~~}}, ~~~
-%%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
+\code{\link{planLTPD}}, \code{\link{planAOQL}}
 }
 \examples{
 showClass("ACSPlan")

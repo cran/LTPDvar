@@ -3,20 +3,9 @@
 \alias{LTPDvar}
 \docType{package}
 \title{
-LTPD single sampling plans for inspection by variables
+LTPD and AOQL single sampling plans for inspection by variables
 }
-\description{Calculation and evaluation of LTPD plans for sampling inspection by variables
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-%%\tabular{ll}{
-%%Package: \tab LTPDvar\cr
-%%Type: \tab Package\cr
-%%Version: \tab 1.0\cr
-%%Date: \tab 2011-06-12\cr
-%%License: \tab GPL-2\cr
-%%LazyLoad: \tab yes\cr
-%%}
+\description{Calculation and evaluation of LTPD and AOQL plans for sampling inspection by variables which minimize mean inspection cost per lot of process average quality 
 }
 \author{
 Nikola Kasprikova
@@ -24,7 +13,7 @@ Nikola Kasprikova
 Maintainer: Nikola Kasprikova <data@tulipany.cz>
 }
 
-\section{LTPD plans for acceptance sampling inspection by variables}{
+\section{Introduction}{
 Assume that measurements  of a single
 quality characteristic \eqn{X} are independent, identically distributed
 normal random variables with unknown parameters \eqn{\mu}  and \eqn{\sigma^2}.
@@ -42,10 +31,30 @@ The inspection procedure is as follows:
 
  Accept the lot if \deqn{          {{U - \bar{x}} \over s } \ge k} or
          \deqn{   {{\bar{x} - L}\over s} \ge k. }
+
+The operating  characteristic (see \code{\link{OC}}) is 
+\deqn{                                   
+L(p;n,k) = \int_{k\sqrt n}^\infty g(t;n-1,u_{1-p}\sqrt n) \,dt,}
+
+where \eqn{                              
+g(t;n-1,u_{1-p}\sqrt n) }
+is probability density function of non-central \eqn{t} distribution with \eqn{(n-1)}
+degrees of freedom and noncentrality parameter \eqn{\lambda=u_{1-p}\sqrt n}.
+
+If case that we do not use exact formula for \code{\link{OC}} and we use the normal distribution
+as an approximation of the non-central  \eqn{t}  distribution instead, we have
+\deqn{
+L(p;n,k) = \Phi \left({u_{1-p}-k \over A} \right),}
+where
+\deqn{
+A = \sqrt{{1 \over n} + {k^2 \over 2(n-1)}}  .  }
+
+The function \eqn{\Phi} is a standard normal distribution function
+and \eqn{u_{1-p}} is a quantile of order \eqn{1-p}.
  
 The task to be solved is determination of the sample size \eqn{n} and the critical
- value \eqn{k}.    
-     
+ value \eqn{k}.}    
+\section{LTPD plans for acceptance sampling inspection by variables}{     
 In case  of acceptance sampling by attributes (each  inspected item  is classified  as either  good or defective), there exist a procedure (Dodge and Romig, 1998) for finding sampling plans
 which minimize  the  mean  number of items inspected per lot of process average quality
 \deqn{I_s = N - (N-n)\cdot L(\bar{p};n,c) }
@@ -78,25 +87,7 @@ variables divided by the cost of inspection of one item by attributes (usually i
 the mean inspection  cost per lot of process average quality (or equivalently minimizing \eqn{I_{ms}})
 under the condition \eqn{L(p_t;n,k) = 0.10}. 
 
-The operating  characteristic (see \code{\link{OC}}) is 
-\deqn{                                   
-L(p;n,k) = \int_{k\sqrt n}^\infty g(t;n-1,u_{1-p}\sqrt n) \,dt,}
-
-where \eqn{                              
-g(t;n-1,u_{1-p}\sqrt n) }
-is probability density function of non-central \eqn{t} distribution with \eqn{(n-1)}
-degrees of freedom and noncentrality parameter \eqn{\lambda=u_{1-p}\sqrt n}.
-
-If case that we do not use exact formula for \code{\link{OC}} and we use the normal distribution
-as an approximation of the non-central  \eqn{t}  distribution instead, we have
-\deqn{
-L(p;n,k) = \Phi \left({u_{1-p}-k \over A} \right),}
-where
-\deqn{
-A = \sqrt{{1 \over n} + {k^2 \over 2(n-1)}}  .  }
-
-The function \eqn{\Phi} in is a standard normal distribution function
-and \eqn{u_{1-p}} is a quantile of order \eqn{1-p}. If we use this approximation for operating  characteristic, the equation \eqn{L(p_t;n,k)=0.10} has 
+ If we use approximative formula for operating  characteristic, the equation \eqn{L(p_t;n,k)=0.10} has 
 one and only one solution (see (Klufa, 1994))
  \deqn{k = {u_{1-p_t} - u_{0.10}.h \over g},}
 where
@@ -121,6 +112,19 @@ where \eqn{\alpha(n)} is the producer's risk
 Function \code{\link{planLTPD}} searches for the sample size \eqn{n} minimizing \eqn{I_{ms}(n)} and gives plan with resulting \eqn{n} and corresponding \eqn{k} (see \code{\link{kL}}) as output.  In  \code{\link{planLTPD}} if \code{method="napprox"}, approximate \code{\link{OC}} is used and the solution is obtained using procedure described in (Klufa, 1994). If \code{method="exact"} (default), the optimization procedure searches for \eqn{n} in interval with centre at \eqn{n} resulting from \code{planLTPD(..., method = "napprox")}.
 
 }
+\section{AOQL plans for acceptance sampling inspection by variables}{
+Under the assumption that each inspected item  is classified  as either  good or defective
+(acceptance sampling by attributes) Dodge and Romig (1998) introduced sampling plans \eqn{(n, c)}
+which minimize  the  mean  number of items inspected per lot of process average quality, assuming  that the remainder of rejected lots is inspected
+\deqn{I_s = N - (N-n)\!\cdot\!L(\bar p;n,c)                       }
+under the condition
+\deqn{
+\max_{0<p<1} AOQ(p) = p_L,                                    }
+where \eqn{p_L} is the average outgoing quality limit (the given parameter) and AOQ is the average outgoing quality, i. e. the mean fraction defective  after  inspection (assuming that each defective item found is replaced by good one) when   the  fraction  defective  before  inspection was \eqn{p}.
+Sampling plans for inspection by variables, which in comparison with sampling plans for inspection by attributes in many situations bring considerable savings in inspection cost, were then introduced in (Klufa, 1997).
+ Function \code{\link{planAOQL}} searches for plan minimizing \eqn{I_{ms}(n)} under the condition that \code{\link{AOQ}} does not exceed the given value \eqn{p_L}.  In  \code{\link{planAOQL}} if \code{method="napprox"}, approximate \code{\link{OC}} is used and the solution is obtained using procedure described in (Klufa, 1997). If \code{method="exact"} (default), the optimization procedure searches for \eqn{n} in interval with centre at \eqn{n} resulting from \code{planAOQL(..., method = "napprox")}.
+
+}
 \references{
 Dodge, H. F. - Romig, H. G.: Sampling  Inspection  Tables: Single and 
 Double Sampling. John Wiley, 1998.
@@ -129,10 +133,12 @@ Klufa, J.:  Acceptance Sampling by Variables when the Remainder
   of Rejected Lots is Inspected. Statistical Papers, Vol.35, 337 - 349, 1994.
 
 Klufa, J.: Exact calculation of the Dodge-Romig LTPD single sampling plans for inspection by variables. Statistical Papers, Vol. 51(2), 297-305, 2010.
+
+Klufa J,: Dodge-Romig AOQL single sampling plans for inspection by variables. Statistical Papers 38: 111 - 119, 1997.
 }
 \keyword{ package }
 \seealso{
-\code{\link{planLTPD}}, \code{\link{kL}}, \code{\link{OC}},  \code{\link{Ims}}
+\code{\link{planLTPD}}, \code{\link{planAOQL}}, \code{\link{kL}}, \code{\link{OC}}, \code{\link{AOQ}}, \code{\link{Ims}}
 }
 \examples{# calculation of LTPD plan
 zz=planLTPD(N=1000,pt=0.1,pbar=0.001);zz
@@ -144,4 +150,6 @@ kL(n=16,pt=0.1)
 zz2=new("ACSPlan", n=16, k=2.71)
 plot(zz2,xl=0.001, xu=0.15, xlabm="fraction defective",
 ylabm="probability of acceptance",typem="l")
+# calculation of AOQL plan
+planAOQL(N=1000,pbar=0.005,pL=0.01, method="napprox", cm=1.5)
 }

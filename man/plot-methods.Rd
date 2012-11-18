@@ -11,7 +11,7 @@ Methods for function \code{plot} in package \pkg{graphics}
 \describe{
 
 \item{\code{signature(x = "ACSPlan")}}{
-method for plotting \code{\link{OC}} (operating characteristics, i. e. curve showing probability of acceptance of a lot with fraction defective \eqn{p}) for acceptance sampling plan (object of class \code{\link{ACSPlan-class}})
+method for plotting \code{\link{OC}} (operating characteristic, i. e. curve showing probability of acceptance of a lot with fraction defective \eqn{p}) for acceptance sampling plan (object of class \code{\link{ACSPlan-class}})
 }
 
 \item{\code{signature(x = "ANY")}}{
