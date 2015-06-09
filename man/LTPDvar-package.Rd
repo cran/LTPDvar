@@ -5,20 +5,19 @@
 \title{
 LTPD and AOQL single sampling plans for inspection by variables
 }
-\description{Calculation and evaluation of LTPD and AOQL plans for sampling inspection by variables which minimize mean inspection cost per lot of process average quality 
+\description{Calculation and evaluation of LTPD and AOQL plans for sampling inspection by variables when the remainder of rejected lots is inspected by attributes which minimize mean inspection cost per lot of process average quality 
 }
 \author{
 Nikola Kasprikova
 
 Maintainer: Nikola Kasprikova <data@tulipany.cz>
 }
-
 \section{Introduction}{
 Assume that measurements  of a single
 quality characteristic \eqn{X} are independent, identically distributed
-normal random variables with unknown parameters \eqn{\mu}  and \eqn{\sigma^2}.
+normal random variables with parameters \eqn{\mu}  and \eqn{\sigma^2}.
  For the quality characteristic \eqn{X}  either  an upper specification
-limit \eqn{U} is given (the  item is defective (nonconforming) if its  measurement exceeds \eqn{U}), or
+limit \eqn{U} is given (the  item is defective (non-conforming) if its  measurement exceeds \eqn{U}), or
 a lower  specification  limit \eqn{L}  is given (the  item  is defective if its
 measurement  is  smaller  than  \eqn{L}).  It  is  further assumed that
 the unknown  parameter  \eqn{\sigma}  is  estimated  using  the  sample  standard
@@ -87,29 +86,13 @@ variables divided by the cost of inspection of one item by attributes (usually i
 the mean inspection  cost per lot of process average quality (or equivalently minimizing \eqn{I_{ms}})
 under the condition \eqn{L(p_t;n,k) = 0.10}. 
 
- If we use approximative formula for operating  characteristic, the equation \eqn{L(p_t;n,k)=0.10} has 
-one and only one solution (see (Klufa, 1994))
- \deqn{k = {u_{1-p_t} - u_{0.10}.h \over g},}
-where
-\deqn{g = 1 - {u_{0.10}^2 \over 2(n-1)},}
-\deqn{h = \sqrt{ {g \over n} + {u_{1-p_t}^2 \over 2(n-1)} }. }
-
-If we use exact formula for \code{\link{OC}}, then exact solution of the equation \eqn{L(p_t;n,k)=0.10}
- is (see \code{\link{kL}})
-\deqn{
-k=\frac{t_{0.9}(n-1,u_{1-p_t}\sqrt n)}{\sqrt n},    }
-
-where \eqn{t_{0.9}(n-1,u_{1-p_t}\sqrt n)} is a quantile of order 0.9  
-of non-central \eqn{t} distribution with \eqn{(n-1)}
-degrees of freedom and noncentrality parameter \eqn{\lambda=u_{1-p_t}\sqrt n}.
-
-Then \eqn{I_{ms}} may be expressed as a function of one variable \eqn{n}
+ Then \eqn{I_{ms}} may be expressed as a function of one variable \eqn{n}
 \deqn{
 I_{ms}(n)=n\cdot c_m+(N-n)\cdot \alpha(n),     }
 where \eqn{\alpha(n)} is the producer's risk  
 (the probability of rejecting a lot of process average quality).
 
-Function \code{\link{planLTPD}} searches for the sample size \eqn{n} minimizing \eqn{I_{ms}(n)} and gives plan with resulting \eqn{n} and corresponding \eqn{k} (see \code{\link{kL}}) as output.  In  \code{\link{planLTPD}} if \code{method="napprox"}, approximate \code{\link{OC}} is used and the solution is obtained using procedure described in (Klufa, 1994). If \code{method="exact"} (default), the optimization procedure searches for \eqn{n} in interval with centre at \eqn{n} resulting from \code{planLTPD(..., method = "napprox")}.
+Function \code{\link{planLTPD}} searches for the sample size \eqn{n} minimizing \eqn{I_{ms}(n)} and gives plan with resulting \eqn{n} and corresponding \eqn{k} as output. In \code{\link{planLTPD}} if \code{method="napprox"}, approximate \code{\link{OC}} is used and the solution is obtained using procedure described in (Klufa, 1994). If \code{method="exact"} (default), the optimization procedure searches for \eqn{n} in interval with centre at \eqn{n} resulting from \code{planLTPD(..., method = "napprox")}.
 
 }
 \section{AOQL plans for acceptance sampling inspection by variables}{
@@ -122,10 +105,24 @@ under the condition
 \max_{0<p<1} AOQ(p) = p_L,                                    }
 where \eqn{p_L} is the average outgoing quality limit (the given parameter) and AOQ is the average outgoing quality, i. e. the mean fraction defective  after  inspection (assuming that each defective item found is replaced by good one) when   the  fraction  defective  before  inspection was \eqn{p}.
 Sampling plans for inspection by variables, which in comparison with sampling plans for inspection by attributes in many situations bring considerable savings in inspection cost, were then introduced in (Klufa, 1997).
- Function \code{\link{planAOQL}} searches for plan minimizing \eqn{I_{ms}(n)} under the condition that \code{\link{AOQ}} does not exceed the given value \eqn{p_L}.  In  \code{\link{planAOQL}} if \code{method="napprox"}, approximate \code{\link{OC}} is used and the solution is obtained using procedure described in (Klufa, 1997). If \code{method="exact"} (default), the optimization procedure searches for \eqn{n} in interval with centre at \eqn{n} resulting from \code{planAOQL(..., method = "napprox")}.
-
+ Function \code{\link{planAOQL}} searches for plan minimizing \eqn{I_{ms}(n)} under the condition that \code{\link{AOQ}} does not exceed the given value \eqn{p_L}.  In  \code{\link{planAOQL}} if \code{method="napprox"}, approximate \code{\link{OC}} is used and the solution is obtained using procedure described in (Klufa, 1997). If \code{method="exact"} (default), the optimization procedure searches for \eqn{n} in interval with centre at \eqn{n} resulting from \code{planAOQL(..., method = "napprox")}.}
+\section{Rectifying LTPD and AOQL plans minimizing \eqn{I_{ms}} based on EWMA statistics}{Another option is to use a procedure based on EWMA statistic. The procedure is as follows: draw a random sample of \eqn{n} items from the lot and compute the sample mean \eqn{\bar{x}} and the statistic \eqn{T} at time \eqn{t} as \eqn{T_t=\lambda \bar{x}+(1-\lambda)T_{t-1}}, where \eqn{\lambda}
+ is a smoothing constant (usually between 0 and 1). Accept the lot if
+\deqn{  
+\frac{U-T_t}{\sigma} \ge k}  or \deqn{  \frac{T_t-L}{\sigma} \ge k. } 
+The operating characteristic is (see e.g. (Aslam et al., 2015)) 
+\eqn{
+  L(p,n,k)=\Phi((u_{1-p}-k)A),  }
+where  \eqn{
+  A=\sqrt{\frac{n(2-\lambda)}{\lambda}},  }
+where the function \eqn{\Phi}  is a standard normal distribution function and  \eqn{u_{1-p}} is a quantile of order  \eqn{1-p} (the unique root of the equation  \eqn{\Phi(u)=1-p)}.
+Similarly for the unknown \eqn{ \sigma} case, when the sample standard deviation is used in place of \eqn{ \sigma} - the operating characteristic is then (see e.g. Aslam et al., 2015) 
+\deqn{L(p)=\Phi(u_{1-p}c_4-k)\sqrt{\frac{1}{\frac{\lambda}{ n(2-\lambda)}+k^2(1-{c_4}^2) }},}
+where \eqn{c_4=\sqrt{(2/(n-1))}\frac{\Gamma(n/2)}{\Gamma((n-1)/2)}}.
 }
 \references{
+    Aslam, M., Azam, M., and Jun, C.: A new lot inspection procedure based on exponentially weighted moving average. International Journal of Systems Science 46,  1392 - 1400,  2015. 
+
 Dodge, H. F. - Romig, H. G.: Sampling  Inspection  Tables: Single and 
 Double Sampling. John Wiley, 1998.
 
@@ -135,21 +132,20 @@ Klufa, J.:  Acceptance Sampling by Variables when the Remainder
 Klufa, J.: Exact calculation of the Dodge-Romig LTPD single sampling plans for inspection by variables. Statistical Papers, Vol. 51(2), 297-305, 2010.
 
 Klufa J,: Dodge-Romig AOQL single sampling plans for inspection by variables. Statistical Papers 38: 111 - 119, 1997.
+
 }
 \keyword{ package }
 \seealso{
-\code{\link{planLTPD}}, \code{\link{planAOQL}}, \code{\link{kL}}, \code{\link{OC}}, \code{\link{AOQ}}, \code{\link{Ims}}
+\code{\link{planLTPD}}, \code{\link{planAOQL}}, \code{\link{OC}}, \code{\link{AOQ}}, \code{\link{Ims}}
 }
 \examples{# calculation of LTPD plan
 zz=planLTPD(N=1000,pt=0.1,pbar=0.001);zz
 plot(zz);
-# find critical value for given sample size
-## and lot tolerance fraction defective 
-kL(n=16,pt=0.1)
 # create another plan
 zz2=new("ACSPlan", n=16, k=2.71)
-plot(zz2,xl=0.001, xu=0.15, xlabm="fraction defective",
-ylabm="probability of acceptance",typem="l")
+plot(zz2,xl=0.001, xu=0.15, xlabm="fraction non-conforming",
+ylabm="probability of acceptance",typem="l",typeOC="exact")
+plot(new("ACSPlan", n=20, k=2.58555),typeOC="ewmaSK",lam=0.95)
 # calculation of AOQL plan
 planAOQL(N=1000,pbar=0.005,pL=0.01, method="napprox", cm=1.5)
 }

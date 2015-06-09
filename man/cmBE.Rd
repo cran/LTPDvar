@@ -11,7 +11,8 @@ equal to mean inspection cost per lot of process average quality for inspection
 by attributes, using plan \eqn{(n, c)}.
 }
 \usage{
-cmBE(N, pbar,px,n,c,type=c("LTPD","AOQL"))
+cmBE(N, pbar,px,n,c,type=c("LTPD","AOQL"),
+type2 = c("exact", "napprox","ewmaSK","ewma2"),lam=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,9 +34,15 @@ acceptance number of benchmark plan for sampling inspection by attributes
   \item{type}{
 type of acceptance sampling plan; \code{"LTPD"} stands for Lot Tolerance Percent Defective (see \code{\link{planLTPD}}), \code{"AOQL"} stands for  Average Outgoing Quality Limit (see \code{\link{planAOQL}})
 }
+  \item{type2}{
+type of  {\link{OC}} to be used
+}
+ \item{lam}{
+smoothing parameter in case that the EWMA statistic is to be used, defaults to 1
+}
 }
 \value{
-probability of acceptance of a lot (single number)
+single number
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -43,7 +50,7 @@ probability of acceptance of a lot (single number)
 %% ...
 }
 \references{
-Klufa, J.: Exact calculation of the Dodge-Romig LTPD single sampling plans for inspection by variables. Statistical Papers, Springer, Vol. 51(2), pages 297-305, 2010.
+Kasprikova, N. and Klufa, J.: AOQL Sampling Plans for Inspection by Variables and Attributes Versus the Plans for Inspection by Attributes. Quality Technology & Quantitative Management, 12/6. 2015.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -52,7 +59,7 @@ Klufa, J.: Exact calculation of the Dodge-Romig LTPD single sampling plans for i
 \code{\link{planLTPD}},  \code{\link{planAOQL}}
 }
 \examples{
-cmBE(N=1000,pbar=0.001,px=0.01,n=80,c=0,type="LTPD");
+cmBE(N=1000,pbar=0.001,px=0.01,n=80,c=0,type="LTPD",type2="exact");
 }
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the

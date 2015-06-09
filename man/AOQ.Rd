@@ -9,7 +9,7 @@ Average outgoing quality is the mean fraction defective after inspection when th
 \deqn{AOQ(p)=\left(1-\frac{n}N\right)\!\cdot p\cdot\!L(p;n,c).}
 }
 \usage{
-AOQ(p,n,k,N, type=c("t","napprox"))
+AOQ(p,n,k,N, type=c("exact", "napprox","ewmaSK","ewma2"),lam=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,7 +26,10 @@ critical value
 lot size (number of items in the lot)
 }
   \item{type}{
-type of operating characteristic, see \code{\link{OC}}, default value "t" i. e. exact OC is used
+type of operating characteristic, see \code{\link{OC}}, default value "exact" 
+}
+  \item{lam}{
+smoothing parameter for the EWMA statistic, default 1
 }
 }
 \value{

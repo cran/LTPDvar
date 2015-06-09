@@ -8,7 +8,7 @@ Operating characteristic
 when using plan \eqn{(n, k)} for sampling inspection
 }
 \usage{
-OC(p, n, k, type = c("t", "napprox"))
+OC(p, n, k, type = c("exact", "napprox","ewmaSK","ewma2"),lam=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,7 +22,10 @@ sample size
 critical value
 }
   \item{type}{
-function used for operating characteristic; \code{"t"} stands for exact function using non-central t-distribution (see (Johnson  and Welch, 1940)), \code{"napprox"} stands for approximation using normal distribution,  (see (Jennett  and Welch, 1939))
+function used for operating characteristic; \code{"t"} stands for exact function using non-central t-distribution (see (Johnson  and Welch, 1940)), \code{"napprox"} stands for approximation using normal distribution,  (see (Jennett  and Welch, 1939)); if EWMA statistic is to be used, \code{"ewmaSK"} stands for the sigma known case,  \code{"ewma2"} stands for the sigma unknown case
+}
+ \item{lam}{
+smoothing parameter in case that EWMA statistic is used
 }
 }
 \value{
@@ -49,5 +52,5 @@ OC(p=0.1,n=85,k=2.44)
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{htest}
+\keyword{misc}
 % __ONLY ONE__ keyword per line

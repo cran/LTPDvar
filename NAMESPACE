@@ -1,6 +1,8 @@
 importFrom("graphics", plot)
 
-export("kL","Ims","planLTPD","OC","AOQ","planAOQL","cmBE")
+import(methods)
+
+export("Ims","planLTPD","OC","AOQ","planAOQL","cmBE")
 
 exportClasses("ACSPlan")
 
