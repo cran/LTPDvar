@@ -1,5 +1,8 @@
 importFrom("graphics", plot)
 
+importFrom("stats", "optimize", "phyper", "pnorm", "pt", "qnorm",
+     "uniroot")
+
 import(methods)
 
 export("Ims","planLTPD","OC","AOQ","planAOQL","cmBE")

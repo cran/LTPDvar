@@ -14,4 +14,3 @@ method for extracting sample size \eqn{n} from object of class \code{\link{ACSPl
 }
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }

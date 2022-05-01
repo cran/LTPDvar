@@ -14,4 +14,3 @@ method for extracting critical value \eqn{k} from object of \code{\link{ACSPlan-
 }
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }

@@ -1,5 +1,5 @@
-2a50d2372a11276f512a3393e3775ad7 *DESCRIPTION
-dd0dff7640aa64b4f89113ba60be3023 *NAMESPACE
+43edbbedf5901baa99a7f43294805bdf *DESCRIPTION
+454a006e8bf2d9f448d0c317cf6ea4bd *NAMESPACE
 f560eb804044d949bda9966db26e703e *R/AOQ.R
 546e81c7748dca10d67e62014684b997 *R/Ims.R
 4a423ec97e264596b08e3aa2031d3664 *R/OC.R
@@ -10,13 +10,13 @@ fa4af83b9b380c2d952748adcc7492e1 *R/cmBE.R
 30175559395b18edd6570cf1f6948682 *man/ACSPlan-class.Rd
 62c4fab412a65eb5a925f9d9d209baf0 *man/AOQ.Rd
 e55e886327f64cc8133dc0aff1d1cf25 *man/Ims.Rd
-add2ff30f90994014028480d186e7140 *man/LTPDvar-package.Rd
+5f9cdb4cf8cf86e921a6deecdf3b3a86 *man/LTPDvar-package.Rd
 bb30457ebd5232c3e1872151e9422393 *man/OC.Rd
 c50416e7acc21ba21b2e919530e3892e *man/cmBE.Rd
-d1e85430e8328f95c888cbac8f3ab79e *man/k-methods.Rd
+e2cdf93920633de4f05fa4a898e36211 *man/k-methods.Rd
 8f32baa78cdee5f6f2166e954ca3556d *man/k.Rd
-274a436df91246529a722e35c689e19f *man/n-methods.Rd
+3683995519c2daa45f1867ddda36d338 *man/n-methods.Rd
 2af72eaafe8b6474c8da1147c95ffba2 *man/n.Rd
 a6f53f35101dad08ddef519013c06948 *man/planAOQL.Rd
 67b5fbb7210d98ef4e81ae8c378f7f8c *man/planLTPD.Rd
-07d681ec63cb7d440aedd12e4c4c48ca *man/plot-methods.Rd
+676bb913397bdcdd85f0bf816a608643 *man/plot-methods.Rd

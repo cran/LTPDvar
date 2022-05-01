@@ -19,4 +19,3 @@ method for plotting \code{\link{OC}} (operating characteristic, i. e. curve show
 }
 }}
 \keyword{methods}
-\keyword{ ~~ other possible keyword(s) ~~ }

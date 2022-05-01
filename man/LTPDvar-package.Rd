@@ -5,7 +5,7 @@
 \title{
 LTPD and AOQL single sampling plans for inspection by variables
 }
-\description{Calculation and evaluation of LTPD and AOQL plans for sampling inspection by variables when the remainder of rejected lots is inspected by attributes which minimize mean inspection cost per lot of process average quality 
+\description{Calculation and evaluation of rectifying LTPD and AOQL plans for sampling inspection by variables  which minimize the mean inspection cost per lot of process average quality 
 }
 \author{
 Nikola Kasprikova
